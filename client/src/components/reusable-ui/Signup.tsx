@@ -12,7 +12,7 @@ const LASTNAME_REGEX = /^[a-zA-Z]{2,23}$/;
 const MAIL_REGEX = /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
-const SignInComponent = () => {
+const SignUpComponent = () => {
     const [user, setUser] = useState('');
     const [validUser, setValidUser] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
@@ -79,8 +79,10 @@ const SignInComponent = () => {
     }, [user, firstname, lastname, pwd, matchPwd, role]);
 
     const handleSubmit = async (event: { preventDefault: () => void }) => {
+        console.log('Submit');
         event.preventDefault();
         if (!validUser || !validMail || !validFirstName || !validLastName || !validPwd || !validMatch) {
+            console.log('Invalid form');
             setErrMsg('Veuillez remplir correctement tous les champs');
             return;
         }
@@ -115,6 +117,7 @@ const SignInComponent = () => {
             console.error(error);
         }
     };
+
     return (
         <>
             {success === true ? (
@@ -123,13 +126,15 @@ const SignInComponent = () => {
                         <div className="flex flex-col justify-center items-center h-full select-none p-6 bg-indigo-600 rounded-t-xl">
                             <img className="max-w-20" src="img/logo-small.png" alt="" />
                         </div>
-                        <div className="min-h-96 px-8 py-4 text-left bg-white rounded-b-xl shadow-lg">
+                        <div className="px-8 py-4 text-left bg-white rounded-b-xl shadow-lg">
                             <div className="flex flex-col justify-center items-center h-full select-none">
                                 <div className="flex flex-col items-center justify-center gap-2 mb-4"></div>
                                 <section className="flex flex-col items-center">
-                                    <h1>Votre compte a été créé !</h1>
-                                    <p>
-                                        <Link to="/connexion">Connectez-vous !</Link>
+                                    <h1 className="text-center">
+                                        Votre compte a été créé ! Vous pouvez maintenant vous connecter
+                                    </h1>
+                                    <p className="text-indigo-600 hover:text-indigo-800 font-semibold py-8">
+                                        <Link to="/connexion">Page de connexion</Link>
                                     </p>
                                 </section>
                             </div>
@@ -375,17 +380,8 @@ const SignInComponent = () => {
                                 </div>
                                 <div className="mt-5">
                                     <button
+                                        onClick={handleSubmit}
                                         type="submit"
-                                        disabled={
-                                            !validUser ||
-                                            !validMail ||
-                                            !validFirstName ||
-                                            !validLastName ||
-                                            !validPwd ||
-                                            !validMatch
-                                                ? true
-                                                : false
-                                        }
                                         className="py-1 px-8 bg-sky-500 hover:bg-sky-700 focus:ring-offset-blue-200 text-white w-full transition ease-in duration-200 text-center text-base font-semibold shadow-md focus:outline-none focus:ring-2 focus:ring-offset-2 rounded-lg cursor-pointer select-none">
                                         S'inscrire
                                     </button>
@@ -411,4 +407,4 @@ const SignInComponent = () => {
     );
 };
 
-export default SignInComponent;
+export default SignUpComponent;
