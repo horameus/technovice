@@ -32,7 +32,7 @@ const Profile: React.FC = () => {
                     `https://technovice-app-196e28ed15ce.herokuapp.com/api/users/${user?.user_id}`, // Utilisation de l'ID de l'utilisateur du contexte
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem('token')}`, // Si tu utilises un token pour l'authentification
+                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Si tu utilises un token pour l'authentification
                         },
                     },
                 );

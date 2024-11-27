@@ -29,7 +29,7 @@ function App() {
     const { setUser } = useUser();
 
     useEffect(() => {
-        if (localStorage.getItem('token')) {
+        if (localStorage.getItem('accessToken')) {
             api.get('/my-infos')
                 .then(response => {
                     setUser({

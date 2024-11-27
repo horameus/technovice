@@ -5,7 +5,6 @@ import jwt from 'jsonwebtoken';
 const prisma = new PrismaClient();
 
 const authController = {
-    
     // controller to connect
     async login(req, res) {
         const { mail, password } = req.body;
@@ -16,7 +15,7 @@ const authController = {
             });
 
             if (!user) {
-                return res.status(400).json({ message: "This user does not exist" });
+                return res.status(400).json({ message: 'This user does not exist' });
             }
 
             const match = await bcrypt.compare(password, user.password);
@@ -25,11 +24,15 @@ const authController = {
                 return res.status(400).json({ message: 'Incorrect password' });
             }
 
-            const jwToken = jwt.sign({ id: user.user_id }, process.env.ACCESS_TOKEN_SECRET, {
-                expiresIn: '1h',
+            const accessToken = jwt.sign({ id: user.user_id }, process.env.ACCESS_TOKEN_SECRET, {
+                expiresIn: '1m',
             });
 
-            return res.json({ jwToken });
+            const refreshToken = jwt.sign({ id: user.user_id }, process.env.REFRESH_TOKEN_SECRET, {
+                expiresIn: '30d',
+            });
+
+            res.json({ accessToken, refreshToken });
         } catch (error) {
             return res.status(500).json({ message: 'Error while connecting', error });
         } finally {
@@ -58,9 +61,7 @@ const authController = {
 
             return res.json(user);
         } catch (error) {
-            return res
-                .status(500)
-                .json({ message: 'Error retrieving information', error });
+            return res.status(500).json({ message: 'Error retrieving information', error });
         } finally {
             prisma.$disconnect();
         }

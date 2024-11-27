@@ -33,14 +33,15 @@ const SignInComponent = () => {
             });
 
             if (response.status === 200) {
-                localStorage.setItem('token', response.data.jwToken);
+                localStorage.setItem('accessToken', response.data.accessToken);
+                localStorage.setItem('refreshToken', response.data.refreshToken);
                 const userResponse = await api.get('/my-infos');
 
                 if (userResponse.status === 200) {
                     setUser(userResponse.data);
                 }
             }
-            console.log(user)
+            console.log(user);
         } catch (error) {
             if (axios.isAxiosError(error) && error.response) {
                 setErrMsg(error.response.data.message);

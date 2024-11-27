@@ -10,7 +10,7 @@ const Header: React.FC = () => {
     const handleDisconnect = async () => {
         // Disconnect the user
         if (user) {
-            localStorage.removeItem('token');
+            localStorage.removeItem('accessToken');
             setUser(null);
         }
     };

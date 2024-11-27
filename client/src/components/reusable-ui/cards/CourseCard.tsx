@@ -22,13 +22,13 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, variant = 'public', cla
     const handleFollowClick = async () => {
         // Logique pour suivre le cours
         if (user) {
-            await fetch (
+            await fetch(
                 `https://technovice-app-196e28ed15ce.herokuapp.com/api/watches/courses/${course.course_id}/users/${user.user_id}`,
                 {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
-                        Authorization: `Bearer ${localStorage.getItem('token')}`,
+                        Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
                     },
                 },
             );

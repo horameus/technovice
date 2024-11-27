@@ -34,6 +34,5 @@ export const useUser = () => {
 // It allows the user object to be available in the entire application.
 export const UserProvider = ({ children }: { children: React.ReactNode }) => {
     const [user, setUser] = useState<UserTypes | null>(null);
-    console.log(user);
     return <UserContext.Provider value={{ user, setUser }}>{children}</UserContext.Provider>;
 };
