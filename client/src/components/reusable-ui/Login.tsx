@@ -34,7 +34,7 @@ const SignInComponent = () => {
 
             if (response.status === 200) {
                 localStorage.setItem('accessToken', response.data.accessToken);
-                localStorage.setItem('refreshToken', response.data.refreshToken);
+
                 const userResponse = await api.get('/my-infos');
 
                 if (userResponse.status === 200) {

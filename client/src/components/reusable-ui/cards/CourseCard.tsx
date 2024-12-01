@@ -37,7 +37,17 @@ const CourseCard: React.FC<CourseCardProps> = ({ course, variant = 'public', cla
     };
 
     const handleUnfollowClick = async () => {
-        // Logique pour arrêter de suivre le cours
+        await fetch(
+            `https://technovice-app-196e28ed15ce.herokuapp.com/api/watches/courses/${course.course_id}/users/${user?.user_id}`,
+            {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Authorization: `Bearer ${localStorage.getItem('accessToken')}`,
+                },
+            },
+        );
+        navigate(`/tableau-de-bord`);
     };
 
     return (

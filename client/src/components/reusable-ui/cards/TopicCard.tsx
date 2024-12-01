@@ -9,18 +9,16 @@ interface TopicCardProps {
     className?: string;
 }
 
-const TopicCard: React.FC<TopicCardProps> = ({ topic, variant = 'public', className }) => {
+const TopicCard: React.FC<TopicCardProps> = ({ topic, className }) => {
     const navigate = useNavigate();
 
     const handleTopicClick = () => {
-        navigate(`/forum/${topic.topic_id}`);
+        navigate(`/forums/${topic.topic_id}`);
     };
 
     return (
         <div
-            className={`bg-white border-2 border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col ${
-                variant === 'dashboard' ? 'w-full lg:w-1/2' : 'w-full'
-            } ${className || ''}`}>
+            className={`bg-white border-2 border-gray-200 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-300 flex flex-col ${className || ''}`}>
             <div className="relative z-10">
                 <img
                     className="rounded-t-lg object-cover h-40 w-full"

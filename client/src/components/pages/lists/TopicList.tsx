@@ -51,7 +51,9 @@ const TopicList: React.FC<TopicListProps> = ({ slicer, tagFilter, variant = 'pub
     return (
         <div
             className={`${
-                variant === 'public' ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6' : 'space-y-6' // Affichage en colonne pour le dashboard
+                variant === 'public'
+                    ? 'grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6'
+                    : 'grid grid-cols-1 gap-2' // Affichage en colonne pour le dashboard
             }`}>
             {topics.map(topic => (
                 <TopicCard key={topic.topic_id} topic={topic} variant={variant} />

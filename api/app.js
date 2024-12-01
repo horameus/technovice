@@ -1,3 +1,4 @@
+import cookieParser from 'cookie-parser';
 import cors from 'cors';
 import express from 'express';
 import path, { dirname } from 'path';
@@ -21,6 +22,8 @@ app.use(
 );
 
 app.use(express.json());
+
+app.use(cookieParser());
 
 const port = process.env.NODE_ENV === 'test' ? 4000 : process.env.PORT || 3000;
 

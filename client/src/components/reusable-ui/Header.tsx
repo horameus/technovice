@@ -2,6 +2,7 @@ import { useUser } from '@/context/UserContext';
 import React from 'react';
 import { IoIosArrowDown } from 'react-icons/io';
 import { Link } from 'react-router-dom';
+import api from '../../api';
 import Searchbar from './Searchbar';
 
 const Header: React.FC = () => {
@@ -10,8 +11,15 @@ const Header: React.FC = () => {
     const handleDisconnect = async () => {
         // Disconnect the user
         if (user) {
-            localStorage.removeItem('accessToken');
-            setUser(null);
+            const response = await api.post('/logout', {
+                headers: { 'Content-Type': 'application/json' },
+                withCredentials: true,
+            });
+
+            if (response.status === 200) {
+                localStorage.removeItem('accessToken');
+                setUser(null);
+            }
         }
     };
 

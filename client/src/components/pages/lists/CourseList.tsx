@@ -60,13 +60,13 @@ const CourseList: React.FC<CourseListProps> = ({
                     let data: CourseTypes[] = await response.json();
 
                     if (tagFilter) {
-                        const tagsArray = tagFilter.split(','); // Sépare les tags sélectionnés
+                        const tagsArray = tagFilter.split(','); // filter by tags
                         data = data.filter(course =>
                             tagsArray.every(tag => course.course_tags.includes(tag)),
                         );
                     }
                     if (slicer) {
-                        data = data.slice(0, slicer); // Limiter les cours selon le slicer
+                        data = data.slice(0, slicer); // To limit courses displayed
                     }
                     setCourses(data);
                 }
