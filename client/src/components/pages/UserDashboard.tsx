@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import { useUser } from '../../context/UserContext';
 import Footer from '../reusable-ui/Footer';
 import Header from '../reusable-ui/Header';
@@ -8,9 +7,6 @@ import CourseList from './lists/CourseList';
 import TopicList from './lists/TopicList';
 
 const UserDashboard: React.FC = () => {
-    console.log('UserDashboard component is rendering');
-    const { user_id } = useParams<{ user_id: string }>();
-    console.log('user_id', user_id);
     const [loading, setLoading] = useState<boolean>(true);
     const [error, setError] = useState<string | null>(null);
     const [userData, setUserData] = useState<UserTypes | null>(null);
@@ -25,15 +21,15 @@ const UserDashboard: React.FC = () => {
         const fetchUserData = async () => {
             try {
                 const response = await fetch(
-                    `https://technovice-app-196e28ed15ce.herokuapp.com/api/users/${user?.user_id}`, // Utilisation de l'ID de l'utilisateur du contexte
+                    `https://technovice-app-196e28ed15ce.herokuapp.com/api/users/${user?.user_id}`, // using the user_id from the context
                     {
                         headers: {
-                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // Si tu utilises un token pour l'authentification
+                            Authorization: `Bearer ${localStorage.getItem('accessToken')}`, // using the accessToken to authenticate
                         },
                     },
                 );
                 const data = await response.json();
-                setUserData(data); // Mise à jour des données utilisateur
+                setUserData(data); // update user data
             } catch (error) {
                 if (error instanceof Error) {
                     setError(error.message);

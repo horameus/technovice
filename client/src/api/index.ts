@@ -24,6 +24,7 @@ api.interceptors.request.use(config => {
 api.interceptors.response.use(
     response => response,
     async error => {
+        console.log('error : ', error.response);
         if (
             error.response.status === 403 &&
             error.response.data.message === 'Invalid or expired access token'

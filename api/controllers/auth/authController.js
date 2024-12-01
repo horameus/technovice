@@ -49,7 +49,6 @@ const authController = {
 
     // controller to disconnect
     async logout(req, res) {
-        console.log('logout');
         res.clearCookie('refreshToken', {
             httpOnly: true,
             sameSite: 'strict',
