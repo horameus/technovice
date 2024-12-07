@@ -1,5 +1,5 @@
 import { Router } from 'express';
-import { coursesController } from '../controllers/coursesController.js'; // Corriger la casse du nom de fichier
+import { coursesController } from '../controllers/coursesController.js'; 
 import validators from '../middlewares/validator.js';
 
 const courseRouter = Router();

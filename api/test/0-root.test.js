@@ -1,20 +1,9 @@
-import { PrismaClient } from '@prisma/client';
 import { expect } from 'chai';
 import dotenv from 'dotenv';
 import request from 'supertest';
 import app from '../app.js';
-import { createTestUser } from './fixtures.js';
 
-dotenv.config({ path: '.env.test' });
-process.env.DATABASE_URL = process.env.TEST_DATABASE_URL;
-const prisma = new PrismaClient();
-
-before(async function () {
-    this.app = app;
-    await prisma.users.deleteMany();
-    const user = await createTestUser();
-    this.user_id = user.user_id;
-});
+dotenv.config({ path: '.env.test' }); // Charge les variables de test depuis '.env.test'.
 
 describe('Test Techno\'vice', () => {
     it('should succeed for health route', async () => {
@@ -24,4 +13,3 @@ describe('Test Techno\'vice', () => {
         expect(body.message).to.eq("Bienvenue sur Techno'vice API");
     });
 });
-
