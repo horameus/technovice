@@ -13,6 +13,7 @@ import Profile from './components/pages/Profile';
 import About from './components/pages/annexes/About';
 import Conditions from './components/pages/annexes/Conditions';
 import Legal from './components/pages/annexes/Legal';
+import Contact from './components/pages/annexes/Contact'
 import Error404 from './components/pages/errors/Error404';
 import TeacherList from './components/pages/lists/TeacherList';
 import SignInComponent from './components/reusable-ui/Login';
@@ -94,6 +95,8 @@ function App() {
                 <Route path="/conditions" element={<Conditions />} />
                 {/* Informations légales */}
                 <Route path="/informations" element={<Legal />} />
+                {/* Contact */}
+                <Route path="/contact" element={<Contact />} />
                 <Route path="*" element={<Error404 />} />
             </Routes>
         </Router>

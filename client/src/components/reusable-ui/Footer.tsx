@@ -14,6 +14,9 @@ const Footer: React.FC = () => {
                     <a href="" className="font-semibold text-indigo-600">
                         Informations légales
                     </a>
+                    <a href="" className="font-semibold text-indigo-600">
+                        Contact                   
+                    </a>
                 </div>
                 <div className="md:w-1/3 flex flex-col place-items-center py-2">
                     <Link to="/">

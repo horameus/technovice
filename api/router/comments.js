@@ -11,8 +11,7 @@ const commentRouter = Router();
 commentRouter.post(
     '/api/topics/:topic_id(\\d+)/message',
     validators('comments'),
-    commentsController.createComment
-);
+    commentsController.createComment);
 
 // Modify a message
 commentRouter.patch('/api/topics/:topic_id(\\d+)/message/:com_id(\\d+)'
