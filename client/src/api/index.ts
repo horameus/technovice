@@ -29,33 +29,21 @@ api.interceptors.response.use(
             error.response.status === 403 &&
             error.response.data.message === 'Invalid or expired access token'
         ) {
-            console.log('cookies : ', document.cookie);
+            try {
+                const { data } = await axios.post(
+                    'http://localhost:3000/refresh',
+                    {},
+                    { withCredentials: true },
+                );
 
-            const refreshToken = document.cookie.replace(
-                /(?:(?:^|.*;\s*)refreshToken\s*=\s*([^;]*).*$)|^.*$/,
-                '$1',
-            );
+                // save the new accessToken
+                localStorage.setItem('accessToken', data.newAccessToken);
 
-            if (refreshToken) {
-                try {
-                    const { data } = await axios.post(
-                        'http://localhost:3000/refresh',
-                        {},
-                        { withCredentials: true },
-                    );
-
-                    // Sauvegarder le nouveau accessToken
-                    localStorage.setItem('accessToken', data.newAccessToken);
-
-                    // Réessayer la requête initiale avec le nouveau token
-                    error.config.headers['Authorization'] = `Bearer ${data.newAccessToken}`;
-                    return api.request(error.config);
-                } catch (refreshError) {
-                    console.error('Unable to refresh token:', refreshError);
-                    window.location.href = '/connexion';
-                }
-            } else {
-                console.error('No refresh token available');
+                // Retry original request
+                error.config.headers['Authorization'] = `Bearer ${data.newAccessToken}`;
+                return api.request(error.config);
+            } catch (refreshError) {
+                console.error('Unable to refresh token:', refreshError);
                 window.location.href = '/connexion';
             }
         }
