@@ -1,5 +1,9 @@
 # TechnO'vice project
 
+> [!WARNING]  
+> Ce repository est une copie en l'état du projet de fin de formation avec l'école O'clock. il a été réalisé en collaboration avec Nicolas Bagat, Manon Leonard, Michael Parisi et Nasredine Fiker.
+> This repository is an unaltered copy of the final project of the O'clock School training program. It was produced in collaboration with Nicolas Bagat, Manon Leonard, Michael Parisi and Nasredine Fiker. 
+
 Bienvenue sur notre projet ! / Welcome to our project !
 
 ## Introduction
